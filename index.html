@@ -13,7 +13,7 @@
 <meta name="twitter:title" content="This meeting could have been an email.">
 <meta name="twitter:description" content="It still can be.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Ccircle cx='5' cy='8' r='1.4' fill='%23171b21'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="tokens.css?4">
+<link rel="stylesheet" href="tokens.css?5">
 <style>
 :root{--red:var(--amber-base);--quiet:var(--longquan-base)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--quiet:oklch(.621 var(--ding))}}
@@ -109,27 +109,21 @@ var toggle = document.getElementById('themeToggle');
 var submitBtn = document.querySelector('button[type="submit"]');
 var tagline = document.getElementById('tagline');
 
-// theme
-function setTheme(dark, animate) {
-  if (animate === false) {
-    document.documentElement.style.transition = 'none';
-    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
-    document.documentElement.offsetHeight; // force reflow
-    document.documentElement.style.transition = '';
-  } else {
-    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
-  }
-  toggle.textContent = dark ? 'light' : 'dark';
-  localStorage.setItem('theme', dark ? 'dark' : 'light');
+// theme: the system's, until the visitor turns it; nothing is kept
+var root = document.documentElement;
+var system = window.matchMedia('(prefers-color-scheme: dark)');
+function isDark() {
+  var t = root.getAttribute('data-theme');
+  return t ? t === 'dark' : system.matches;
 }
-
-var saved = localStorage.getItem('theme');
-var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-setTheme(saved ? saved === 'dark' : prefersDark, false);
-
+toggle.textContent = isDark() ? 'light' : 'dark';
+system.addEventListener('change', function() {
+  if (!root.getAttribute('data-theme')) toggle.textContent = isDark() ? 'light' : 'dark';
+});
 toggle.addEventListener('click', function() {
-  var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  setTheme(!isDark, true);
+  var dark = !isDark();
+  root.setAttribute('data-theme', dark ? 'dark' : 'light');
+  toggle.textContent = dark ? 'light' : 'dark';
 });
 
 // readiness + char count
