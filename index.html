@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>This meeting could have been an email.</title>
 <meta name="description" content="It still can be.">
 <meta property="og:title" content="This meeting could have been an email.">
@@ -12,240 +12,50 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="This meeting could have been an email.">
 <meta name="twitter:description" content="It still can be.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>.</text></svg>">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Ccircle cx='5' cy='8' r='1.4' fill='%23171b21'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="tokens.css?4">
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-:root {
-  --bg: #f5f0eb;
-  --surface: #fffcf8;
-  --border: #e0d8cf;
-  --border-light: #ece6de;
-  --text: #3a3530;
-  --text-soft: #8a8078;
-  --text-faint: #b5ada5;
-  --accent: #2a6e4e;
-  --accent-hover: #358a62;
-  --placeholder: #c0b8b0;
-  --field-bg: #faf6f1;
-  --red: #c06050;
-  --label-accent: #7a6850;
-  --focus: #2a6e4e;
-}
-
-[data-theme="dark"] {
-  --bg: #1a1816;
-  --surface: #242120;
-  --border: #3a3530;
-  --border-light: #2e2a28;
-  --text: #e0d8cf;
-  --text-soft: #8a8078;
-  --text-faint: #5a534a;
-  --accent: #4a9e72;
-  --accent-hover: #5db885;
-  --placeholder: #5a534a;
-  --field-bg: #1e1c1a;
-  --red: #d08070;
-  --label-accent: #a09080;
-  --focus: #4a9e72;
-}
-
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem 1.5rem;
-}
-
-/* everything that carries color transitions together */
-body, .email-form, .field label, .field input, .field textarea,
-.actions, button[type="submit"], h1, .theme-toggle, .tagline,
-.note, .char-count {
-  transition: background 0.5s ease, color 0.5s ease,
-              border-color 0.5s ease, box-shadow 0.5s ease;
-}
-
-header {
-  width: 100%;
-  max-width: 36rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 2rem;
-}
-
-h1 {
-  font-size: 1.6rem;
-  font-weight: 400;
-  color: var(--text-soft);
-  letter-spacing: -0.01em;
-}
-
-.theme-toggle {
-  background: none;
-  border: none;
-  color: var(--text-faint);
-  cursor: pointer;
-  font-size: 0.95rem;
-  padding: 0.3rem 0;
-  font-family: inherit;
-  letter-spacing: 0.03em;
-}
-
-.theme-toggle:hover {
-  color: var(--text-soft);
-}
-
-.email-form {
-  width: 100%;
-  max-width: 36rem;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.field {
-  display: flex;
-  border-bottom: 1px solid var(--border-light);
-  transition: border-color 0.5s ease;
-}
-
-.field label {
-  width: 6.5rem;
-  flex-shrink: 0;
-  padding: 1rem 1.1rem;
-  font-size: 1.1rem;
-  color: var(--label-accent);
-  background: var(--field-bg);
-  border-right: 1px solid var(--border-light);
-  display: flex;
-  align-items: flex-start;
-}
-
-.field input,
-.field textarea {
-  flex: 1;
-  border: none;
-  outline: none;
-  padding: 1rem 1.1rem;
-  font-family: inherit;
-  font-size: 1.15rem;
-  color: var(--text);
-  background: transparent;
-  resize: none;
-  line-height: 1.5;
-}
-
-.field input:focus,
-.field textarea:focus {
-  box-shadow: inset 3px 0 0 var(--focus);
-}
-
-.field input::placeholder,
-.field textarea::placeholder {
-  color: var(--placeholder);
-  transition: color 0.5s ease;
-}
-
-.body-field {
-  flex-direction: column;
-  border-bottom: none;
-}
-
-.body-field label {
-  width: 100%;
-  border-right: none;
-  border-bottom: 1px solid var(--border-light);
-  padding: 0.8rem 1.1rem;
-  font-size: 1rem;
-}
-
-.body-field textarea {
-  padding: 1rem 1.1rem;
-  min-height: 7rem;
-}
-
-.actions {
-  padding: 1rem 1.1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  border-top: 1px solid var(--border-light);
-  background: var(--field-bg);
-}
-
-.char-count {
-  font-size: 0.9rem;
-  color: var(--text-faint);
-}
-
-button[type="submit"] {
-  background: var(--border);
-  color: var(--text-faint);
-  border: none;
-  padding: 0.7rem 2.2rem;
-  border-radius: 5px;
-  font-size: 1.1rem;
-  cursor: default;
-  font-family: inherit;
-  transition: background 0.4s ease, color 0.4s ease, transform 0.15s ease;
-}
-
-button[type="submit"].ready {
-  background: var(--accent);
-  color: #fff;
-  cursor: pointer;
-}
-
-button[type="submit"].ready:hover {
-  background: var(--accent-hover);
-}
-
-button[type="submit"].ready:active {
-  transform: scale(0.97);
-}
-
-footer {
-  max-width: 36rem;
-  width: 100%;
-  margin-top: 2rem;
-  text-align: center;
-}
-
-.tagline {
-  font-size: 1.15rem;
-  color: var(--text-soft);
-  margin-bottom: 1rem;
-}
-
-.tagline.sent {
-  color: var(--accent);
-}
-
-.note {
-  font-size: 0.95rem;
-  color: var(--text-faint);
-  line-height: 1.6;
-}
-
-@media (max-width: 480px) {
-  body { padding: 2rem 1rem; }
-  header { margin-bottom: 1.5rem; }
-  .field label { width: 5.5rem; padding: 0.8rem; font-size: 1rem; }
-  .field input, .field textarea { padding: 0.8rem; font-size: 1.05rem; }
-  .actions { padding: 0.8rem; }
-  footer { margin-top: 1.5rem; }
+:root{--red:var(--amber-base)}
+body{margin:0;padding:3rem 16px 1.4rem;min-height:100svh;box-sizing:border-box;display:flex;flex-direction:column;background:var(--paper);color:var(--ink);font:19px/1.5 var(--sans);font-variant-numeric:oldstyle-nums}
+main,.by{width:100%;max-width:36rem;margin:0 auto}
+main{flex:1}
+header{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;margin-bottom:2rem}
+h1{margin:0;font-size:1.6rem;font-weight:400;line-height:1.3}
+button,input,textarea{font:inherit;color:inherit;background:none;border:0;padding:0}
+button{color:var(--longquan-base);cursor:pointer}
+button:focus-visible{outline:1px solid var(--rule);outline-offset:4px}
+.theme-toggle{font-size:.95rem}
+.theme-toggle:hover{color:var(--ink)}
+form{border:1px solid var(--rule);border-radius:8px;overflow:hidden}
+.field{display:flex;align-items:baseline;border-bottom:1px solid var(--rule)}
+label{width:6.5rem;flex-shrink:0;padding:1rem 1.1rem;font-size:1.1rem;color:var(--longquan-base);font-variant-caps:all-small-caps;letter-spacing:.04em}
+input,textarea{flex:1;min-width:0;padding:1rem 1.1rem;font-size:1.15rem;line-height:1.5;color:var(--ink);outline:0;resize:none}
+input:focus,textarea:focus{box-shadow:inset 3px 0 0 var(--longquan-base)}
+::placeholder{color:var(--longquan-base);opacity:1}
+.body-field{display:block;border:0}
+.body-field label{display:block;width:auto;padding-bottom:0}
+textarea{display:block;width:100%;box-sizing:border-box;min-height:7rem}
+.actions{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1rem 1.1rem;border-top:1px solid var(--rule)}
+.char-count{font-size:.9rem;color:var(--longquan-base);font-variant-numeric:lining-nums tabular-nums}
+button[type=submit]{padding:.7rem 2.2rem;font-size:1.1rem;border-radius:5px;box-shadow:inset 0 0 0 1px var(--rule);cursor:default}
+button[type=submit].ready{background:var(--longquan-accent);color:var(--paper);box-shadow:none;cursor:pointer}
+button[type=submit].ready:active{transform:scale(.97)}
+footer{margin-top:2rem}
+.tagline{margin:0;font-size:1.15rem}
+.tagline.sent{color:var(--longquan-accent)}
+a{color:var(--longquan-accent);text-underline-offset:.15em}
+.by{margin-top:3rem;text-align:right;font-size:.8rem;font-family:var(--book)}
+@media (max-width:480px){
+header{margin-bottom:1.5rem}
+label{width:5.5rem;padding:.8rem;font-size:1rem}
+input,textarea{padding:.8rem;font-size:1.05rem}
+.actions{padding:.8rem}
+footer{margin-top:1.5rem}
 }
 </style>
 </head>
 <body>
+<main>
 
 <header>
   <h1>This meeting could have been an email.</h1>
@@ -275,7 +85,7 @@ footer {
   </div>
   <div class="field body-field">
     <label for="body">Anything else (keep it short)</label>
-    <textarea id="body" placeholder="if you need more than a few lines, maybe it couldn't have been an email"></textarea>
+    <textarea id="body" placeholder="if you need more than a few lines, maybe it couldn&rsquo;t have been an email"></textarea>
   </div>
   <div class="actions">
     <span class="char-count" id="charCount"></span>
@@ -284,9 +94,11 @@ footer {
 </form>
 
 <footer>
-  <p class="tagline" id="tagline">The meeting could have been an email. It still can be.</p>
-  <p class="note">Opens your email client. Nothing is stored here.</p>
+  <p class="tagline" id="tagline">It still can be.</p>
 </footer>
+
+</main>
+<p class="by">by <a href="https://github.com/bonchicbongenre/email">bonchicbongenre</a></p>
 
 <script>
 var form = document.getElementById('emailForm');
